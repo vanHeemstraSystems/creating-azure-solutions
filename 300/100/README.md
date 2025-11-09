@@ -378,3 +378,5 @@ Step 14: Cost Management & Optimization
 ⸻
 
 Would you like me to generate the flowchart as a visual image (diagram-style, color-coded by phase) so you can keep it as a quick reference or learning poster?
+
+<img width="1024" height="1536" alt="Image" src="https://github.com/user-attachments/assets/c230e8bc-0fb1-41d7-93cf-404ae112c1f5" />
