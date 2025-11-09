@@ -16,18 +16,18 @@ Understand the logical and recommended order of setting up Azure resources — f
 
 Why first? Governance ensures consistency, security, and cost control. Without it, you risk chaos when your environment grows.
 
-1️⃣ Define the Management Hierarchy
+1️⃣ Define the Management Hierarchy<br/>
 	•	Management Groups → Subscriptions → Resource Groups → Resources
 
-Order & reasoning:
+Order & reasoning:<br/>
 	1.	Management Group – Optional at small scale, but essential for enterprises.
 	•	Used to organize subscriptions (e.g., by department, environment, or region).
-	•	Allows you to apply policies, role-based access control (RBAC), and budgeting at a higher level.
+	•	Allows you to apply policies, role-based access control (RBAC), and budgeting at a higher level.<br/>
 	2.	Subscription – Logical billing and isolation boundary.
 	•	Typically separate by environment:
 	•	Dev, Test, Prod
 	•	or by department (Finance, IT, R&D)
-	•	You can enforce spending limits, quotas, and role assignments per subscription.
+	•	You can enforce spending limits, quotas, and role assignments per subscription.<br/>
 	3.	Resource Group – Logical container for related Azure resources.
 	•	Used to manage lifecycle, permissions, and costs together.
 	•	Example: a single application may have all its resources (VM, database, storage) in one resource group.
@@ -38,12 +38,12 @@ Order & reasoning:
 
 Why second? Before you deploy anything, you need the virtual network backbone it will live in — otherwise your resources won’t communicate properly or securely.
 
-2️⃣ Design & Create the Virtual Network (VNet)
+2️⃣ Design & Create the Virtual Network (VNet) <br/>
 	•	Create a VNet per environment or application tier.
 	•	Subdivide into subnets for isolation (e.g., frontend, backend, data).
 	•	Configure Network Security Groups (NSGs) to control inbound/outbound traffic.
 
-Optional but good practice:
+Optional but good practice:<br/>
 	•	Use Azure Bastion for secure VM management (no public IPs).
 	•	Add Private Endpoints for Azure Storage, SQL, etc. (for private connectivity).
 
@@ -53,12 +53,12 @@ Optional but good practice:
 
 Why now? You have a structure and a network; next, you define who can do what and enforce compliance.
 
-3️⃣ Set up Role-Based Access Control (RBAC)
+3️⃣ Set up Role-Based Access Control (RBAC)<br/>
 	•	Apply least privilege:
 	•	Management Group/Subscription: assign roles to teams (e.g., Cloud Engineers = Contributor).
 	•	Resource Group: assign roles to specific resources (e.g., App Devs = Reader).
 
-4️⃣ Implement Policies & Blueprints
+4️⃣ Implement Policies & Blueprints <br/>
 	•	Use Azure Policy to enforce standards (e.g., only deploy to specific regions, only certain VM SKUs).
 	•	Use Azure Blueprints for pre-defined configurations across environments.
 
@@ -68,12 +68,12 @@ Why now? You have a structure and a network; next, you define who can do what an
 
 Why next? Now that your structure, network, and governance are ready, you can safely deploy the actual workloads.
 
-5️⃣ Create Core Compute Resources
+5️⃣ Create Core Compute Resources<br/>
 	•	For IaaS: Create Virtual Machines or Scale Sets.
 	•	For PaaS: Deploy App Services, Functions, or AKS clusters.
 	•	Make sure they’re connected to your pre-created VNet.
 
-6️⃣ Create Supporting Resources
+6️⃣ Create Supporting Resources<br/>
 	•	Storage Accounts (for logs, data, backups)
 	•	Azure SQL / Cosmos DB / PostgreSQL (for databases)
 	•	Key Vaults (for secrets and certificates)
@@ -85,7 +85,7 @@ Why next? Now that your structure, network, and governance are ready, you can sa
 
 Why after core resources? Once you understand the manual process, automate it for repeatability and consistency.
 
-7️⃣ Automate Using Infrastructure as Code (IaC)
+7️⃣ Automate Using Infrastructure as Code (IaC)br/>
 	•	Learn Bicep or Terraform (both Azure-native and widely used).
 	•	Version control your IaC in Git.
 	•	Deploy via Azure DevOps Pipelines or GitHub Actions.
@@ -96,14 +96,14 @@ Why after core resources? Once you understand the manual process, automate it fo
 
 Why last? Once things are running, your focus shifts to reliability, cost, and performance.
 
-8️⃣ Set Up Monitoring
+8️⃣ Set Up Monitoring<br/>
 	•	Use Azure Monitor, Log Analytics, and Application Insights.
 	•	Create Alerts and Dashboards.
 
-9️⃣ Configure Backup & Recovery
+9️⃣ Configure Backup & Recovery<br/>
 	•	Use Azure Backup and Site Recovery for disaster preparedness.
 
-🔟 Optimize & Secure
+🔟 Optimize & Secure<br/>
 	•	Use Azure Advisor for recommendations.
 	•	Review Cost Management + Billing dashboards.
 	•	Continuously tighten network security and access policies.
@@ -126,7 +126,7 @@ Step	Resource	Example
 
 ⸻
 
-🧠 Pro Tip: Think “Top-Down Design → Bottom-Up Build”
+🧠 Pro Tip: Think “Top-Down Design → Bottom-Up Build”<br/>
 	•	Top-down: Design your architecture, governance, and policies first.
 	•	Bottom-up: Deploy your networking and workloads after the structure is in place.
 
