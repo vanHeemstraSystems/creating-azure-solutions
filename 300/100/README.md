@@ -20,16 +20,16 @@ Why first? Governance ensures consistency, security, and cost control. Without i
 	•	Management Groups → Subscriptions → Resource Groups → Resources
 
 Order & reasoning:<br/>
-	1.	Management Group – Optional at small scale, but essential for enterprises.
-	•	Used to organize subscriptions (e.g., by department, environment, or region).
+	1.	Management Group – Optional at small scale, but essential for enterprises.<br/>
+	•	Used to organize subscriptions (e.g., by department, environment, or region).<br/>
 	•	Allows you to apply policies, role-based access control (RBAC), and budgeting at a higher level.<br/>
-	2.	Subscription – Logical billing and isolation boundary.
-	•	Typically separate by environment:
-	•	Dev, Test, Prod
-	•	or by department (Finance, IT, R&D)
+	2.	Subscription – Logical billing and isolation boundary.<br/>
+	•	Typically separate by environment:<br/>
+	•	Dev, Test, Prod<br/>
+	•	or by department (Finance, IT, R&D)<br/>
 	•	You can enforce spending limits, quotas, and role assignments per subscription.<br/>
-	3.	Resource Group – Logical container for related Azure resources.
-	•	Used to manage lifecycle, permissions, and costs together.
+	3.	Resource Group – Logical container for related Azure resources.<br/>
+	•	Used to manage lifecycle, permissions, and costs together.<br/>
 	•	Example: a single application may have all its resources (VM, database, storage) in one resource group.
 
 ⸻
@@ -39,13 +39,13 @@ Order & reasoning:<br/>
 Why second? Before you deploy anything, you need the virtual network backbone it will live in — otherwise your resources won’t communicate properly or securely.
 
 2️⃣ Design & Create the Virtual Network (VNet) <br/>
-	•	Create a VNet per environment or application tier.
-	•	Subdivide into subnets for isolation (e.g., frontend, backend, data).
+	•	Create a VNet per environment or application tier.<br/>
+	•	Subdivide into subnets for isolation (e.g., frontend, backend, data).<br/>
 	•	Configure Network Security Groups (NSGs) to control inbound/outbound traffic.
 
 Optional but good practice:<br/>
-	•	Use Azure Bastion for secure VM management (no public IPs).
-	•	Add Private Endpoints for Azure Storage, SQL, etc. (for private connectivity).
+	•	Use Azure Bastion for secure VM management (no public IPs).<br/>
+	•	Add Private Endpoints for Azure Storage, SQL, etc. (for private connectivity).<br/>
 
 ⸻
 
@@ -54,13 +54,13 @@ Optional but good practice:<br/>
 Why now? You have a structure and a network; next, you define who can do what and enforce compliance.
 
 3️⃣ Set up Role-Based Access Control (RBAC)<br/>
-	•	Apply least privilege:
+	•	Apply least privilege:<br/>
 	•	Management Group/Subscription: assign roles to teams (e.g., Cloud Engineers = Contributor).
-	•	Resource Group: assign roles to specific resources (e.g., App Devs = Reader).
+	•	Resource Group: assign roles to specific resources (e.g., App Devs = Reader).<br/>
 
 4️⃣ Implement Policies & Blueprints <br/>
-	•	Use Azure Policy to enforce standards (e.g., only deploy to specific regions, only certain VM SKUs).
-	•	Use Azure Blueprints for pre-defined configurations across environments.
+	•	Use Azure Policy to enforce standards (e.g., only deploy to specific regions, only certain VM SKUs).<br/>
+	•	Use Azure Blueprints for pre-defined configurations across environments.<br/>
 
 ⸻
 
@@ -69,15 +69,15 @@ Why now? You have a structure and a network; next, you define who can do what an
 Why next? Now that your structure, network, and governance are ready, you can safely deploy the actual workloads.
 
 5️⃣ Create Core Compute Resources<br/>
-	•	For IaaS: Create Virtual Machines or Scale Sets.
-	•	For PaaS: Deploy App Services, Functions, or AKS clusters.
+	•	For IaaS: Create Virtual Machines or Scale Sets.<br/>
+	•	For PaaS: Deploy App Services, Functions, or AKS clusters.<br/>
 	•	Make sure they’re connected to your pre-created VNet.
 
 6️⃣ Create Supporting Resources<br/>
-	•	Storage Accounts (for logs, data, backups)
-	•	Azure SQL / Cosmos DB / PostgreSQL (for databases)
-	•	Key Vaults (for secrets and certificates)
-	•	Application Insights / Log Analytics (for observability)
+	•	Storage Accounts (for logs, data, backups)<br/>
+	•	Azure SQL / Cosmos DB / PostgreSQL (for databases)<br/>
+	•	Key Vaults (for secrets and certificates)<br/>
+	•	Application Insights / Log Analytics (for observability)<br/>
 
 ⸻
 
@@ -86,9 +86,9 @@ Why next? Now that your structure, network, and governance are ready, you can sa
 Why after core resources? Once you understand the manual process, automate it for repeatability and consistency.
 
 7️⃣ Automate Using Infrastructure as Code (IaC)br/>
-	•	Learn Bicep or Terraform (both Azure-native and widely used).
-	•	Version control your IaC in Git.
-	•	Deploy via Azure DevOps Pipelines or GitHub Actions.
+	•	Learn Bicep or Terraform (both Azure-native and widely used).<br/>
+	•	Version control your IaC in Git.<br/>
+	•	Deploy via Azure DevOps Pipelines or GitHub Actions.<br/>
 
 ⸻
 
@@ -97,38 +97,38 @@ Why after core resources? Once you understand the manual process, automate it fo
 Why last? Once things are running, your focus shifts to reliability, cost, and performance.
 
 8️⃣ Set Up Monitoring<br/>
-	•	Use Azure Monitor, Log Analytics, and Application Insights.
-	•	Create Alerts and Dashboards.
+	•	Use Azure Monitor, Log Analytics, and Application Insights.<br/>
+	•	Create Alerts and Dashboards.<br/>
 
 9️⃣ Configure Backup & Recovery<br/>
-	•	Use Azure Backup and Site Recovery for disaster preparedness.
+	•	Use Azure Backup and Site Recovery for disaster preparedness.<br/>
 
 🔟 Optimize & Secure<br/>
-	•	Use Azure Advisor for recommendations.
-	•	Review Cost Management + Billing dashboards.
-	•	Continuously tighten network security and access policies.
+	•	Use Azure Advisor for recommendations.<br/>
+	•	Review Cost Management + Billing dashboards.<br/>
+	•	Continuously tighten network security and access policies.<br/>
 
 ⸻
 
 🧩 Example: Simple Web App Deployment Order
 
-Step	Resource	Example
-1	Management Group	“CompanyRoot”
-2	Subscription	“Production Subscription”
-3	Resource Group	“RG-WebApp-Prod”
-4	VNet & Subnets	“VNet-WebApp”, “Frontend-Subnet”
-5	NSG	Allow HTTP/HTTPS to frontend
-6	App Service Plan	“ASP-WebApp-Prod”
-7	App Service	“mywebapp.azurewebsites.net”
-8	Storage Account	“stwebappdiaglogs”
-9	App Insights	“AppInsights-WebApp”
+Step	Resource	Example<br/>
+1	Management Group	“CompanyRoot”<br/>
+2	Subscription	“Production Subscription”<br/>
+3	Resource Group	“RG-WebApp-Prod”<br/>
+4	VNet & Subnets	“VNet-WebApp”, “Frontend-Subnet”<br/>
+5	NSG	Allow HTTP/HTTPS to frontend<br/>
+6	App Service Plan	“ASP-WebApp-Prod”<br/>
+7	App Service	“mywebapp.azurewebsites.net”<br/>
+8	Storage Account	“stwebappdiaglogs”<br/>
+9	App Insights	“AppInsights-WebApp”<br/>
 
 
 ⸻
 
 🧠 Pro Tip: Think “Top-Down Design → Bottom-Up Build”<br/>
-	•	Top-down: Design your architecture, governance, and policies first.
-	•	Bottom-up: Deploy your networking and workloads after the structure is in place.
+	•	Top-down: Design your architecture, governance, and policies first.<br/>
+	•	Bottom-up: Deploy your networking and workloads after the structure is in place.<br/>
 
 ⸻
 
@@ -138,9 +138,9 @@ Both
 
 Fantastic — that’s the right instinct, Willem 💪
 
-Let’s do this in two parts:
-1️⃣ A visual flowchart showing the logical order and dependencies of Azure setup.
-2️⃣ A hands-on checklist with practical steps (and CLI/Azure Portal pointers).
+Let’s do this in two parts:<br/>
+1️⃣ A visual flowchart showing the logical order and dependencies of Azure setup.<br/>
+2️⃣ A hands-on checklist with practical steps (and CLI/Azure Portal pointers).<br/>
 
 ⸻
 
@@ -249,9 +249,9 @@ az account management-group create --name "RootGroup"
 
 Why: centralize policy and access for multiple subscriptions.
 
-Step 2: Create or Assign a Subscription
-	•	In Portal: Home → Subscriptions → + Add
-	•	CLI:
+Step 2: Create or Assign a Subscription<br/>
+	•	In Portal: Home → Subscriptions → + Add<br/>
+	•	CLI:<br/>
 
 az account subscription create --offer-type MS-AZR-0017P
 
@@ -271,12 +271,12 @@ PHASE 2 — Networking
 
 Step 4: Create a Virtual Network & Subnet
 
-az network vnet create \
-  --resource-group RG-App01 \
-  --name VNet-App01 \
-  --address-prefix 10.0.0.0/16 \
-  --subnet-name FrontendSubnet \
-  --subnet-prefix 10.0.1.0/24
+az network vnet create \<br/>
+  --resource-group RG-App01 \<br/>
+  --name VNet-App01 \<br/>
+  --address-prefix 10.0.0.0/16 \<br/>
+  --subnet-name FrontendSubnet \<br/>
+  --subnet-prefix 10.0.1.0/24<br/>
 
 Why: define your network and IP range before adding resources.
 
@@ -292,19 +292,19 @@ PHASE 3 — Identity & Policy
 
 Step 6: Assign RBAC Roles
 
-az role assignment create \
-  --assignee user@domain.com \
-  --role "Contributor" \
-  --scope /subscriptions/<sub-id>/resourceGroups/RG-App01
+az role assignment create \<br/>
+  --assignee user@domain.com \<br/>
+  --role "Contributor" \<br/>
+  --scope /subscriptions/<sub-id>/resourceGroups/RG-App01<br/>
 
 Why: manage who can deploy or modify resources.
 
 Step 7: Apply Azure Policy
 
-az policy assignment create \
-  --name "AllowedLocations" \
-  --policy "allowed-locations" \
-  --params '{"listOfAllowedLocations": {"value": ["westeurope"]}}'
+az policy assignment create \<br/>
+  --name "AllowedLocations" \<br/>
+  --policy "allowed-locations" \<br/>
+  --params '{"listOfAllowedLocations": {"value": ["westeurope"]}}'<br/>
 
 Why: enforce compliance (regions, SKU types, etc.).
 
@@ -314,29 +314,29 @@ PHASE 4 — Core Resources
 
 Step 8: Deploy Compute (VM example)
 
-az vm create \
-  --resource-group RG-App01 \
-  --name VM-Web01 \
-  --image Ubuntu2204 \
-  --vnet-name VNet-App01 \
-  --subnet FrontendSubnet \
-  --admin-username azureuser
+az vm create \<br/>
+  --resource-group RG-App01 \<br/>
+  --name VM-Web01 \<br/>
+  --image Ubuntu2204 \<br/>
+  --vnet-name VNet-App01 \<br/>
+  --subnet FrontendSubnet \<br/>
+  --admin-username azureuser<br/>
 
 Step 9: Add Storage
 
-az storage account create \
-  --name stapp01 \
-  --resource-group RG-App01 \
-  --location westeurope \
-  --sku Standard_LRS
+az storage account create \<br/>
+  --name stapp01 \<br/>
+  --resource-group RG-App01 \<br/>
+  --location westeurope \<br/>
+  --sku Standard_LRS<br/>
 
 Step 10: Create a Database (SQL example)
 
-az sql server create \
-  --name sqlserverapp01 \
-  --resource-group RG-App01 \
-  --location westeurope \
-  --admin-user sqladmin \
+az sql server create \<br/>
+  --name sqlserverapp01 \<br/>
+  --resource-group RG-App01 \<br/>
+  --location westeurope \<br/>
+  --admin-user sqladmin \<br/>
   --admin-password 'P@ssw0rd!'
 
 
@@ -360,22 +360,22 @@ terraform apply
 
 Step 12: Enable Monitoring & Logs
 
-az monitor log-analytics workspace create \
-  --resource-group RG-App01 --workspace-name LogApp01
+az monitor log-analytics workspace create \<br/>
+  --resource-group RG-App01 --workspace-name LogApp01<br/>
 
-Step 13: Set Up Backup & Alerts
-	•	Use Azure Backup in the portal for VMs.
-	•	Use Alerts → + Create Alert Rule for CPU/Memory/Cost triggers.
+Step 13: Set Up Backup & Alerts<br/>
+	•	Use Azure Backup in the portal for VMs.<br/>
+	•	Use Alerts → + Create Alert Rule for CPU/Memory/Cost triggers.<br/>
 
-Step 14: Cost Management & Optimization
-	•	Use Azure Advisor and Cost Analysis to optimize usage.
+Step 14: Cost Management & Optimization<br/>
+	•	Use Azure Advisor and Cost Analysis to optimize usage.<br/>
 
 ⸻
 
-🧩 Bonus — Suggested Learning Path
-	1.	Azure Fundamentals (AZ-900) → Big picture overview
-	2.	Azure Administrator (AZ-104) → Core infra, VNet, VMs, RBAC
-	3.	Azure Solutions Architect (AZ-305) → Governance, design patterns, security
+🧩 Bonus — Suggested Learning Path<br/>
+	1.	Azure Fundamentals (AZ-900) → Big picture overview<br/>
+	2.	Azure Administrator (AZ-104) → Core infra, VNet, VMs, RBAC<br/>
+	3.	Azure Solutions Architect (AZ-305) → Governance, design patterns, security<br/>
 
 ⸻
 
