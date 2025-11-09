@@ -1,4 +1,6 @@
-Perfect — that’s a great goal, Willem 👏 Becoming confident in how to design and deploy Azure solutions in the right order is one of the key skills for a Cloud Engineer. Let’s build a step-by-step guide that not only shows what to do, but also why — so you understand the reasoning behind the order.
+# 100 - Creating Azure Solutions Step-by-Step
+
+Becoming confident in how to design and deploy Azure solutions in the right order is one of the key skills for a Cloud Engineer. Let’s build a step-by-step guide that not only shows what to do, but also why — so you understand the reasoning behind the order.
 
 ⸻
 
